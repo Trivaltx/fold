@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN apt-get -qqy update \
     && apt-get -qqy --no-install-recommends install \
         binutils \
+        iputils-ping \
         xfce4 xfce4-goodies gnome-icon-theme tightvncserver \
         xz-utils \
         bzip2 \
