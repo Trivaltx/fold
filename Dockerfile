@@ -6,6 +6,10 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN apt-get -qqy update \
     && apt-get -qqy --no-install-recommends install \
         xfce4 xfce4-goodies gnome-icon-theme tightvncserver \
+        python \
+        python2 \
+        python-gtk2 \
+        python-gnome2 \
 
 
 
