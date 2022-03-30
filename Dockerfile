@@ -5,6 +5,11 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 RUN apt-get -qqy update \
     && apt-get -qqy --no-install-recommends install \
+        xfce4 xfce4-goodies gnome-icon-theme tightvncserver \
+
+
+
+
         sudo \
         supervisor \
         xvfb x11vnc novnc websockify \
@@ -13,12 +18,19 @@ RUN apt-get -qqy update \
         ssh \
         npm \
         wget \
+        software-properties-common \
     && npm install -g wstunnel \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 RUN cp /usr/share/novnc/vnc.html /usr/share/novnc/index.html
+RUN adduser yanz
+
+RUN gpasswd -a yanz sudo
+RUN echo yanz:123456|chpasswd
+RUN su - yanz
+
 
 COPY scripts/* /opt/bin/
 
@@ -46,12 +58,17 @@ RUN apt-get -qqy update \
     && apt install -qqy --no-install-recommends ./fahclient_7.6.21_amd64.deb \
     && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && apt install -qqy --no-install-recommends ./google-chrome-stable_current_amd64.deb \
-    && apt-add-repository ppa:remmina-ppa-team/remmina-next \
-    && apt update \
-    && apt install -qqy --no-install-recommends remmina remmina-plugin-rdp remmina-plugin-secret \
-    && apt-add-repository ppa:obsproject/obs-studio \
-    && apt update \
-    && apt install -qqy --no-install-recommends obs-studio \
+    && wget https://download.foldingathome.org/releases/public/release/fahcontrol/debian-stable-64bit/v7.6/fahcontrol_7.6.21-1_all.deb \
+    && apt install -qqy --no-install-recommends ./fahcontrol_7.6.21-1_all.deb \
+    && wget https://download.foldingathome.org/releases/public/release/fahviewer/debian-stable-64bit/v7.6/fahviewer_7.6.21_amd64.deb \
+    && apt install -qqy --no-install-recommends ./fahviewer_7.6.21_amd64.deb \
+
+
+
+
+
+
+
     && apt install unzip \
     && apt-get autoclean \
     && apt-get autoremove \
