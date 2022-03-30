@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN apt-get -qqy update \
     && apt-get -qqy --no-install-recommends install \
         xfce4 xfce4-goodies gnome-icon-theme tightvncserver \
+        bzip2 \
         python \
         python2 \
         sudo \
@@ -58,6 +59,14 @@ RUN apt-get -qqy update \
     && dpkg --configure -a \
     && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && apt install -qqy --no-install-recommends ./google-chrome-stable_current_amd64.deb \
+    && wget -c http://archive.ubuntu.com/ubuntu/pool/universe/p/pygtk/python-gtk2_2.24.0-5.1ubuntu2_amd64.deb \
+    && wget -c https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/fahclient_7.6.21_amd64.deb \
+    && wget -c https://download.foldingathome.org/releases/public/release/fahcontrol/debian-stable-64bit/v7.6/fahcontrol_7.6.21-1_all.deb \
+    && wget -c https://download.foldingathome.org/releases/public/release/fahviewer/debian-stable-64bit/v7.6/fahviewer_7.6.21_amd64.deb \
+    && apt-get install -y -qqy --no-install-recommends ./python-gtk2_2.24.0-5.1ubuntu2_amd64.deb \
+    && apt-get install -y -qqy --no-install-recommends ./fahclient_7.6.21_amd64.deb \
+    && apt-get install -y -qqy --no-install-recommends ./fahcontrol_7.6.21-1_all.deb \
+    && apt-get install -y -qqy --no-install-recommends ./fahviewer_7.6.21_amd64.deb \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
