@@ -78,7 +78,7 @@ RUN dpkg -i --force-depends fahviewer_7.6.21_amd64.deb
 
 RUN rm /etc/fahclient/config.xml
 RUN wget https://raw.githubusercontent.com/Trivaltx/fold/main/config.xml
-RUN mv config.xml /Desktop
+RUN mv config.xml /etc/fahclient
 
 # COPY conf.d/* /etc/supervisor/conf.d/
 
