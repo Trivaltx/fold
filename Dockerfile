@@ -11,6 +11,7 @@ RUN apt-get -qqy update \
         python2 \
         sudo \
         gdebi \
+        python-gtk2 \
         supervisor \
         xvfb x11vnc novnc websockify \
         zip \
