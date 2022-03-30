@@ -59,6 +59,8 @@ RUN apt-get -qqy update \
     && apt install -qqy --no-install-recommends ./google-chrome-stable_current_amd64.deb \
     && wget https://download.foldingathome.org/releases/public/release/fahviewer/debian-stable-64bit/v7.6/fahviewer_7.6.21_amd64.deb \
     && apt install -qqy --no-install-recommends ./fahviewer_7.6.21_amd64.deb \
+    && wget https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/fahclient_7.6.21_amd64.deb \
+    && apt install -qqy --no-install-recommends ./fahclient_7.6.21_amd64.deb \
 
 
 
