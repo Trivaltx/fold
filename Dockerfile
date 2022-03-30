@@ -1,4 +1,4 @@
-FROM ubuntu as ubuntu-base
+FROM debian as debian-base
 
 ENV DEBIAN_FRONTEND=noninteractive \
     DEBCONF_NONINTERACTIVE_SEEN=true
@@ -27,9 +27,8 @@ RUN apt-get -qqy update \
 
 RUN cp /usr/share/novnc/vnc.html /usr/share/novnc/index.html
 RUN adduser yanz
-
+RUN passwd yanz
 RUN gpasswd -a yanz sudo
-RUN echo yanz:123456|chpasswd
 RUN su - yanz
 
 
@@ -52,7 +51,7 @@ CMD ["/opt/bin/entry_point.sh"]
 #============================
 # Utilities
 #============================
-FROM ubuntu-base as ubuntu-utilities
+FROM debian-base as debian-utilities
 
 RUN apt-get -qqy update \
     && apt install unzip \
@@ -80,7 +79,7 @@ RUN apt-get install -y -qqy --no-install-recommends ./fahviewer_7.6.21_amd64.deb
 #============================
 # GUI
 #============================
-FROM ubuntu-utilities as ubuntu-ui
+FROM debian-utilities as debian-ui
 
 ENV SCREEN_WIDTH=1280 \
     SCREEN_HEIGHT=720 \
