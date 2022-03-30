@@ -102,7 +102,7 @@ ENV SCREEN_WIDTH=1280 \
 # RUN apt-get update -qqy \
 #     && apt-get -qqy install \
 #         xserver-xorg xserver-xorg-video-fbdev xinit pciutils xinput xfonts-100dpi xfonts-75dpi xfonts-scalable kde-plasma-desktop
-RUN apt --fix-broken install
+RUN apt --fix-broken install -y
 RUN apt-get update -qqy \
     && apt-get -qqy install --no-install-recommends \
         dbus-x11 xfce4 \
