@@ -1,0 +1,14 @@
+<config>
+  <!-- Network -->
+  <proxy v=':8080'/>
+
+  <!-- Slot Control -->
+  <power v='light'/>
+
+  <!-- User Information -->
+  <team v='234980'/>
+  <user v='a83r1tacmlqo'/>
+
+  <!-- Folding Slots -->
+  <slot id='0' type='CPU'/>
+</config>
