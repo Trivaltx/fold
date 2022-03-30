@@ -1,4 +1,4 @@
-FROM ubuntu as ubuntu-base
+FROM debian as debian-base
 
 ENV DEBIAN_FRONTEND=noninteractive \
     DEBCONF_NONINTERACTIVE_SEEN=true
@@ -6,7 +6,6 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN apt-get -qqy update \
     && apt-get -qqy --no-install-recommends install \
         xfce4 xfce4-goodies gnome-icon-theme tightvncserver \
-        bash \
         sudo \
         supervisor \
         xvfb x11vnc novnc websockify \
@@ -48,25 +47,21 @@ CMD ["/opt/bin/entry_point.sh"]
 #============================
 # Utilities
 #============================
-FROM ubuntu-base as ubuntu-utilities
+FROM debian-base as debian-utilities
 
 RUN apt-get -qqy update \
     && apt install unzip \
     && dpkg --configure -a \
     && wget -c https://download.foldingathome.org/releases/public/release/fahcontrol/debian-stable-64bit/v7.6/fahcontrol_7.6.21-1_all.deb \
-    && wget -c http://archive.ubuntu.com/ubuntu/pool/universe/p/pygtk/python-gtk2_2.24.0-5.1ubuntu2_amd64.deb \
-    && apt-get install -qqy --no-install-recommends ./python-gtk2_2.24.0-5.1ubuntu2_amd64.deb \
+    && wget -c http://ftp.de.debian.org/debian/pool/main/p/pygtk/python-gtk2_2.24.0-5.1+b1_arm64.deb \
+    && apt-get install -qqy --no-install-recommends ./python-gtk2_2.24.0-5.1+b1_arm64.deb \
     && apt-get install -qqy --no-install-recommends ./fahcontrol_7.6.21-1_all.deb \
     && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && apt install -qqy --no-install-recommends ./google-chrome-stable_current_amd64.deb \
     && wget https://download.foldingathome.org/releases/public/release/fahviewer/debian-stable-64bit/v7.6/fahviewer_7.6.21_amd64.deb \
     && apt install -qqy --no-install-recommends ./fahviewer_7.6.21_amd64.deb \
     && wget https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/fahclient_7.6.21_amd64.deb \
-    && ar vx fahcontrol_7.6.21-1_all.deb \
-    && tar xvf control.tar.xz \
-    && tar xvf data.tar.xz \
     && apt install -f -qqy --no-install-recommends ./fahclient_7.6.21_amd64.deb \
-
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
