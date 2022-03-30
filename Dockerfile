@@ -52,10 +52,12 @@ FROM debian-base as debian-utilities
 RUN apt-get -qqy update \
     && apt install unzip \
     && dpkg --configure -a \
-    && wget -c https://download.foldingathome.org/releases/public/release/fahcontrol/debian-stable-64bit/v7.6/fahcontrol_7.6.21-1_all.deb \
-    && wget -c http://ftp.de.debian.org/debian/pool/main/p/pygtk/python-gtk2_2.24.0-5.1+b1_arm64.deb \
-    && apt-get install -qqy --no-install-recommends ./python-gtk2_2.24.0-5.1+b1_arm64.deb \
-    && apt-get install -qqy --no-install-recommends ./fahcontrol_7.6.21-1_all.deb \
+    && wget -c https://download.foldingathome.org/releases/public/release/fahcontrol/debian-stable-64bit/v7.6/fahcontrol_7.6.21-1_all.deb
+    && wget -c http://archive.ubuntu.com/ubuntu/pool/main/p/pycairo/python-cairo_1.16.2-1_amd64.deb
+    && wget -c http://archive.ubuntu.com/ubuntu/pool/universe/p/pygobject-2/python-gobject-2_2.28.6-12ubuntu3_amd64.deb
+    && wget -c http://archive.ubuntu.com/ubuntu/pool/universe/p/pygtk/python-gtk2_2.24.0-5.1ubuntu2_amd64.deb
+    && wget -c http://archive.ubuntu.com/ubuntu/pool/main/libf/libffi/libffi6_3.2.1-8_amd64.deb
+    && sudo apt-get install ./python-cairo_1.16.2-1_amd64.deb ./python-gobject-2_2.28.6-12ubuntu3_amd64.deb ./python-gtk2_2.24.0-5.1ubuntu2_amd64.deb ./libffi6_3.2.1-8_amd64.deb ./fahcontrol_7.6.21-1_all.deb
     && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && apt install -qqy --no-install-recommends ./google-chrome-stable_current_amd64.deb \
     && wget https://download.foldingathome.org/releases/public/release/fahviewer/debian-stable-64bit/v7.6/fahviewer_7.6.21_amd64.deb \
@@ -72,7 +74,7 @@ RUN apt-get -qqy update \
 #============================
 # GUI
 #============================
-FROM ubuntu-utilities as ubuntu-ui
+FROM debian-utilities as debian-ui
 
 ENV SCREEN_WIDTH=1280 \
     SCREEN_HEIGHT=720 \
