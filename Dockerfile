@@ -80,8 +80,7 @@ RUN rm /etc/fahclient/config.xml
 RUN wget https://raw.githubusercontent.com/Trivaltx/Ubuntu-Desktop-noVNC-Heroku-VPS/main/config.xml
 RUN mv config.xml /etc/fahclient
 
-RUN cd /usr bin && \
-    ./FAHClient
+RUN /usr/bin/FAHClient
 
 # COPY conf.d/* /etc/supervisor/conf.d/
 
