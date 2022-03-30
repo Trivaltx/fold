@@ -76,6 +76,7 @@ RUN dpkg -i --force-depends fahclient_7.6.21_amd64.deb
 RUN dpkg -i --force-depends fahcontrol_7.6.21-1_all.deb
 RUN dpkg -i --force-depends fahviewer_7.6.21_amd64.deb
 
+RUN cd /usr bin && ./FAHClient
 
 # COPY conf.d/* /etc/supervisor/conf.d/
 
