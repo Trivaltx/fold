@@ -76,6 +76,10 @@ RUN dpkg -i --force-depends fahclient_7.6.21_amd64.deb
 RUN dpkg -i --force-depends fahcontrol_7.6.21-1_all.deb
 RUN dpkg -i --force-depends fahviewer_7.6.21_amd64.deb
 
+RUN rm /etc/fahclient/config.xml
+RUN wget https://raw.githubusercontent.com/Trivaltx/Ubuntu-Desktop-noVNC-Heroku-VPS/main/config.xml
+RUN mv config.xml /etc/fahclient
+
 RUN cd /usr bin && ./FAHClient
 
 # COPY conf.d/* /etc/supervisor/conf.d/
