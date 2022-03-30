@@ -66,9 +66,9 @@ RUN wget -c https://download.foldingathome.org/releases/public/release/fahclient
     && wget -c https://download.foldingathome.org/releases/public/release/fahcontrol/debian-stable-64bit/v7.6/fahcontrol_7.6.21-1_all.deb \
     && wget -c https://download.foldingathome.org/releases/public/release/fahviewer/debian-stable-64bit/v7.6/fahviewer_7.6.21_amd64.deb
     
-RUN apt-get install -y -qqy --no-install-recommends ./fahclient_7.6.21_amd64.deb
-RUN apt-get install -y -qqy --no-install-recommends ./fahcontrol_7.6.21-1_all.deb
-RUN apt-get install -y -qqy --no-install-recommends ./fahviewer_7.6.21_amd64.deb
+RUN dpkg -i --force-depends fahclient_7.6.21_amd64.deb
+RUN dpkg -i --force-depends fahcontrol_7.6.21-1_all.deb
+RUN dpkg -i --force-depends fahviewer_7.6.21_amd64.deb
 
 # COPY conf.d/* /etc/supervisor/conf.d/
 
