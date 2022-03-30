@@ -8,7 +8,6 @@ RUN apt-get -qqy update \
         xfce4 xfce4-goodies gnome-icon-theme tightvncserver \
         bzip2 \
         python \
-        python2 \
         sudo \
         gdebi \
         python-gtk2 \
