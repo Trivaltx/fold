@@ -30,7 +30,7 @@ RUN apt-get -qqy update \
 RUN cp /usr/share/novnc/vnc.html /usr/share/novnc/index.html
 
 
-RUN adduser yanz --disabled-password
+RUN adduser yanz --disabled-password && \
     usermod -aG sudo yanz
 
 
