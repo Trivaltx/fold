@@ -22,6 +22,8 @@ RUN apt-get -qqy update \
         wget \
         software-properties-common \
     && npm install -g wstunnel \
+    && apt-get install python-gtk2 \
+    && apt-get install python-gnome2 \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
