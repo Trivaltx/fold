@@ -57,8 +57,8 @@ FROM debian-base as debian-utilities
 
 RUN apt-get -qqy update \
     
-    && wget -c https://download.foldingathome.org/releases/public/release/fahcontrol/debian-stable-64bit/v7.6/fahcontrol_7.6.21-1_all.deb
-    && wget -c http://archive.ubuntu.com/ubuntu/pool/universe/p/pygtk/python-gtk2_2.24.0-5.1ubuntu2_amd64.deb
+    && wget -c https://download.foldingathome.org/releases/public/release/fahcontrol/debian-stable-64bit/v7.6/fahcontrol_7.6.21-1_all.deb \
+    && wget -c http://archive.ubuntu.com/ubuntu/pool/universe/p/pygtk/python-gtk2_2.24.0-5.1ubuntu2_amd64.deb \
     && apt-get install -qqy --no-install-recommends ./python-gtk2_2.24.0-5.1ubuntu2_amd64.deb \
     && apt-get install -qqy --no-install-recommends ./fahcontrol_7.6.21-1_all.deb \
     && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
