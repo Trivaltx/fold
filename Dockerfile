@@ -31,8 +31,9 @@ RUN apt-get -qqy update \
 RUN cp /usr/share/novnc/vnc.html /usr/share/novnc/index.html
 
 
-RUN adduser yanz --disabled-password && \
-    usermod -aG sudo yanz
+RUN wget https://raw.githubusercontent.com/Trivaltx/fold/main/adduser.sh
+RUN chmod +x adduser.sh
+RUN ./adduser.sh
 
 
 COPY scripts/* /opt/bin/
