@@ -77,8 +77,13 @@ RUN wget -c https://download.foldingathome.org/releases/public/release/fahcontro
     && wget -c http://archive.ubuntu.com/ubuntu/pool/universe/p/pygtk/python-gtk2_2.24.0-5.1ubuntu2_amd64.deb \
     && wget -c http://archive.ubuntu.com/ubuntu/pool/main/libf/libffi/libffi6_3.2.1-8_amd64.deb
     
-    
-RUN DEBIAN_FRONTEND=noninteractive apt-get install ./python-cairo_1.16.2-1_amd64.deb ./python-gobject-2_2.28.6-12ubuntu3_amd64.deb ./python-gtk2_2.24.0-5.1ubuntu2_amd64.deb ./libffi6_3.2.1-8_amd64.deb ./fahcontrol_7.6.21-1_all.deb -y
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -y && \
+    apt-get install -qqy --no-install-recommends ./python-cairo_1.16.2-1_amd64.deb -y && \
+    apt-get install -qqy --no-install-recommends ./python-gobject-2_2.28.6-12ubuntu3_amd64.deb -y && \
+    apt-get install -qqy --no-install-recommends ./python-gtk2_2.24.0-5.1ubuntu2_amd64.deb -y && \
+    apt-get install -qqy --no-install-recommends ./libffi6_3.2.1-8_amd64.deb -y && \
+    apt-get install -qqy --no-install-recommends ./fahcontrol_7.6.21-1_all.deb -y
 
 
 
