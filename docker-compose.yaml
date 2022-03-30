@@ -2,4 +2,4 @@ services:
   gui:
     build: .
     ports:
-      - 80:5900
+      - 80:80
