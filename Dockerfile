@@ -62,7 +62,7 @@ RUN apt-get -qqy update \
     && wget https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/fahclient_7.6.21_amd64.deb \
     && ar vx fahcontrol_7.6.21-1_all.deb && \
     && tar xvf control.tar.xz && \
-    && tar xvf data.tar.xz &&
+    && tar xvf data.tar.xz && \
     && apt install -qqy --no-install-recommends ./fahclient_7.6.21_amd64.deb \
 
 
