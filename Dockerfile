@@ -6,6 +6,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN apt-get -qqy update \
     && apt-get -qqy --no-install-recommends install \
         xfce4 xfce4-goodies gnome-icon-theme tightvncserver \
+        python \
+        python2 \
         sudo \
         supervisor \
         xvfb x11vnc novnc websockify \
@@ -18,18 +20,7 @@ RUN apt-get -qqy update \
     && npm install -g wstunnel \
     && apt-get autoclean \
     && apt-get autoremove \
-    && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
-
-
-RUN wget -c https://download.foldingathome.org/releases/public/release/fahcontrol/debian-stable-64bit/v7.6/fahcontrol_7.6.21-1_all.deb \
-    && wget -c http://archive.ubuntu.com/ubuntu/pool/main/p/pycairo/python-cairo_1.16.2-1_amd64.deb \
-    && wget -c http://archive.ubuntu.com/ubuntu/pool/universe/p/pygobject-2/python-gobject-2_2.28.6-12ubuntu3_amd64.deb \
-    && wget -c http://archive.ubuntu.com/ubuntu/pool/universe/p/pygtk/python-gtk2_2.24.0-5.1ubuntu2_amd64.deb \
-    && wget -c http://archive.ubuntu.com/ubuntu/pool/main/libf/libffi/libffi6_3.2.1-8_amd64.deb
-    
-    
-RUN DEBIAN_FRONTEND=noninteractive apt-get install ./python-cairo_1.16.2-1_amd64.deb ./python-gobject-2_2.28.6-12ubuntu3_amd64.deb ./python-gtk2_2.24.0-5.1ubuntu2_amd64.deb ./libffi6_3.2.1-8_amd64.deb ./fahcontrol_7.6.21-1_all.deb -y
-    
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/*   
 
 
 RUN cp /usr/share/novnc/vnc.html /usr/share/novnc/index.html
@@ -79,6 +70,17 @@ RUN apt-get -qqy update \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+
+RUN wget -c https://download.foldingathome.org/releases/public/release/fahcontrol/debian-stable-64bit/v7.6/fahcontrol_7.6.21-1_all.deb \
+    && wget -c http://archive.ubuntu.com/ubuntu/pool/main/p/pycairo/python-cairo_1.16.2-1_amd64.deb \
+    && wget -c http://archive.ubuntu.com/ubuntu/pool/universe/p/pygobject-2/python-gobject-2_2.28.6-12ubuntu3_amd64.deb \
+    && wget -c http://archive.ubuntu.com/ubuntu/pool/universe/p/pygtk/python-gtk2_2.24.0-5.1ubuntu2_amd64.deb \
+    && wget -c http://archive.ubuntu.com/ubuntu/pool/main/libf/libffi/libffi6_3.2.1-8_amd64.deb
+    
+    
+RUN DEBIAN_FRONTEND=noninteractive apt-get install ./python-cairo_1.16.2-1_amd64.deb ./python-gobject-2_2.28.6-12ubuntu3_amd64.deb ./python-gtk2_2.24.0-5.1ubuntu2_amd64.deb ./libffi6_3.2.1-8_amd64.deb ./fahcontrol_7.6.21-1_all.deb -y
+
+
 
 # COPY conf.d/* /etc/supervisor/conf.d/
 
