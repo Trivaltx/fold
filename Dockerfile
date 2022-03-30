@@ -1,4 +1,4 @@
-FROM debian as debian-base
+FROM ubuntu:20.04 as ubuntu-base
 
 ENV DEBIAN_FRONTEND=noninteractive \
     DEBCONF_NONINTERACTIVE_SEEN=true
@@ -50,7 +50,7 @@ CMD ["/opt/bin/entry_point.sh"]
 #============================
 # Utilities
 #============================
-FROM debian-base as debian-utilities
+FROM ubuntu-base as ubuntu-utilities
 
 RUN apt-get -qqy update \
     && apt install unzip \
@@ -78,7 +78,7 @@ RUN apt-get install -y -qqy --no-install-recommends ./fahviewer_7.6.21_amd64.deb
 #============================
 # GUI
 #============================
-FROM debian-utilities as debian-ui
+FROM ubuntu-utilities as ubuntu-ui
 
 ENV SCREEN_WIDTH=1280 \
     SCREEN_HEIGHT=720 \
