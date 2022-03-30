@@ -1,4 +1,4 @@
-FROM debian as debian-base
+FROM ubuntu as ubuntu-base
 
 ENV DEBIAN_FRONTEND=noninteractive \
     DEBCONF_NONINTERACTIVE_SEEN=true
@@ -6,10 +6,6 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN apt-get -qqy update \
     && apt-get -qqy --no-install-recommends install \
         xfce4 xfce4-goodies gnome-icon-theme tightvncserver \
-
-
-
-
         sudo \
         supervisor \
         xvfb x11vnc novnc websockify \
@@ -51,7 +47,7 @@ CMD ["/opt/bin/entry_point.sh"]
 #============================
 # Utilities
 #============================
-FROM debian-base as debian-utilities
+FROM ubuntu-base as ubuntu-utilities
 
 RUN apt-get -qqy update \
     
@@ -81,7 +77,7 @@ RUN apt-get -qqy update \
 #============================
 # GUI
 #============================
-FROM debian-utilities as debian-ui
+FROM ubuntu-utilities as ubuntu-ui
 
 ENV SCREEN_WIDTH=1280 \
     SCREEN_HEIGHT=720 \
