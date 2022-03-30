@@ -27,7 +27,6 @@ RUN apt-get -qqy update \
 
 RUN cp /usr/share/novnc/vnc.html /usr/share/novnc/index.html
 RUN adduser yanz
-RUN passwd yanz
 RUN gpasswd -a yanz sudo
 RUN su - yanz
 
