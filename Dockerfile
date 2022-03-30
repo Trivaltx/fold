@@ -52,7 +52,10 @@ CMD ["/opt/bin/entry_point.sh"]
 #============================
 FROM ubuntu-base as ubuntu-utilities
 
-RUN apt-get -qqy update \
+RUN mv /var/lib/dpkg/info /var/lib/dpkg/info_silent
+RUN mkdir /var/lib/dpkg/info
+
+RUN apt-get update \
     && apt install unzip \
     && dpkg --configure -a \
     && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
@@ -70,6 +73,11 @@ RUN dpkg -i --force-depends fahclient_7.6.21_amd64.deb
 RUN dpkg -i --force-depends fahcontrol_7.6.21-1_all.deb
 RUN dpkg -i --force-depends fahviewer_7.6.21_amd64.deb
 
+RUN mv /var/lib/dpkg/info/* /var/lib/dpkg/info_silent
+RUN rm -rf /var/lib/dpkg/info
+RUN mv /var/lib/dpkg/info_silent /var/lib/dpkg/info
+RUN apt-get update -y
+RUN apt-get upgrade -y
 # COPY conf.d/* /etc/supervisor/conf.d/
 
 
