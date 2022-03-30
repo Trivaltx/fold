@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN apt-get -qqy update \
     && apt-get -qqy --no-install-recommends install \
         xfce4 xfce4-goodies gnome-icon-theme tightvncserver \
+        bash \
         sudo \
         supervisor \
         xvfb x11vnc novnc websockify \
@@ -50,6 +51,7 @@ CMD ["/opt/bin/entry_point.sh"]
 FROM ubuntu-base as ubuntu-utilities
 
 RUN apt-get -qqy update \
+    && apt install unzip \
     && dpkg --configure -a \
     && wget -c https://download.foldingathome.org/releases/public/release/fahcontrol/debian-stable-64bit/v7.6/fahcontrol_7.6.21-1_all.deb \
     && wget -c http://archive.ubuntu.com/ubuntu/pool/universe/p/pygtk/python-gtk2_2.24.0-5.1ubuntu2_amd64.deb \
@@ -65,13 +67,6 @@ RUN apt-get -qqy update \
     && tar xvf data.tar.xz \
     && apt install -f -qqy --no-install-recommends ./fahclient_7.6.21_amd64.deb \
 
-
-
-
-
-
-
-    && apt install unzip \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
