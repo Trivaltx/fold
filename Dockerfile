@@ -83,7 +83,6 @@ RUN mv /var/lib/dpkg/info/* /var/lib/dpkg/info_silent
 RUN rm -rf /var/lib/dpkg/info
 RUN mv /var/lib/dpkg/info_silent /var/lib/dpkg/info
 RUN apt-get update -y
-RUN apt-get upgrade -y
 # COPY conf.d/* /etc/supervisor/conf.d/
 
 
