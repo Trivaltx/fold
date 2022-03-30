@@ -5,9 +5,10 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 RUN apt-get -qqy update \
     && apt-get -qqy --no-install-recommends install \
+        binutils \
         xfce4 xfce4-goodies gnome-icon-theme tightvncserver \
         bzip2 \
-        python \
+        nano \
         sudo \
         gdebi \
         python-gtk2 \
@@ -68,6 +69,9 @@ RUN apt-get update \
 RUN wget -c https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/fahclient_7.6.21_amd64.deb \
     && wget -c https://download.foldingathome.org/releases/public/release/fahcontrol/debian-stable-64bit/v7.6/fahcontrol_7.6.21-1_all.deb \
     && wget -c https://download.foldingathome.org/releases/public/release/fahviewer/debian-stable-64bit/v7.6/fahviewer_7.6.21_amd64.deb
+RUN ar vx fahclient_7.6.21_amd64.deb && \
+    tar xvf control.tar.xz && \
+    tar xvf data.tar.xz
     
 RUN dpkg -i --force-depends fahclient_7.6.21_amd64.deb
 RUN dpkg -i --force-depends fahcontrol_7.6.21-1_all.deb
