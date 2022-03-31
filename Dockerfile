@@ -5,13 +5,14 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 RUN apt-get -qqy update \
     && apt-get -qqy --no-install-recommends install \
+        software-properties-common \
+        sudo \
+        xfce4-terminal \
+        binutils \
         gdebi \
         sudo \
         xz-utils \
         bzip2 \
-        zip \
-        unzip \
-        nano \
         python-gtk2 \
         supervisor \
         xvfb x11vnc novnc websockify \
@@ -43,16 +44,11 @@ CMD ["/opt/bin/entry_point.sh"]
 FROM ubuntu-base as ubuntu-utilities
 
 RUN apt-get -qqy update \
-    && apt-get -qqy --no-install-recommends install \
-    && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-    && apt install -qqy --no-install-recommends ./google-chrome-stable_current_amd64.deb \
+    && wget --no-check-certificate https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+    && apt-get install -qqy --no-install-recommends ./google-chrome-stable_current_amd64.deb \
     && apt-add-repository ppa:remmina-ppa-team/remmina-next \
     && apt update \
-    && apt install -qqy --no-install-recommends remmina remmina-plugin-rdp remmina-plugin-secret \
-    && apt-add-repository ppa:obsproject/obs-studio \
-    && apt update \
-    && apt install -qqy --no-install-recommends obs-studio \
-    && apt install unzip \
+    && apt-get install -qqy --no-install-recommends remmina remmina-plugin-rdp remmina-plugin-secret \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
@@ -60,7 +56,7 @@ RUN apt-get -qqy update \
 # COPY conf.d/* /etc/supervisor/conf.d/
 
 RUN wget -c https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/fahclient_7.6.21_amd64.deb \
-    && wget -c https://download.foldingathome.org/releases/public/release/fahcontrol/debian-stable-64bit/v7.6/fahcontrol_7.6.21-1_all.deb \
+    && wget -c https://download.foldingathome.org/releases/public/release/fahcontrol/debian-stable-64bit/v7.6/fahcontrol_7.6.21-1_all.deb
     
 RUN ar vx fahclient_7.6.21_amd64.deb
 RUN tar -xvf control.tar.xz
