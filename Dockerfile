@@ -1,36 +1,25 @@
-FROM ubuntu:18.04 as ubuntu-base
+FROM ubuntu:20.04 as ubuntu-base
 
 ENV DEBIAN_FRONTEND=noninteractive \
     DEBCONF_NONINTERACTIVE_SEEN=true
 
 RUN apt-get -qqy update \
     && apt-get -qqy --no-install-recommends install \
-        binutils \
-        iputils-ping \
-        xfce4 xfce4-goodies gnome-icon-theme tightvncserver \
+        gdebi \
+        sudo \
         xz-utils \
         bzip2 \
+        zip \
+        unzip \
         nano \
-        sudo \
-        gdebi \
         python-gtk2 \
         supervisor \
         xvfb x11vnc novnc websockify \
-        zip \
-        unzip \
-        ssh \
-        npm \
-        wget \
-        software-properties-common \
-    && npm install -g wstunnel \
     && apt-get autoclean \
     && apt-get autoremove \
-    && rm -rf /var/lib/apt/lists/* /var/cache/apt/*   
-
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 RUN cp /usr/share/novnc/vnc.html /usr/share/novnc/index.html
-
-
 
 COPY scripts/* /opt/bin/
 
@@ -53,16 +42,23 @@ CMD ["/opt/bin/entry_point.sh"]
 #============================
 FROM ubuntu-base as ubuntu-utilities
 
-RUN apt-get update \
-    && apt install unzip \
-    && dpkg --configure -a \
+RUN apt-get -qqy update \
+    && apt-get -qqy --no-install-recommends install \
     && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && apt install -qqy --no-install-recommends ./google-chrome-stable_current_amd64.deb \
+    && apt-add-repository ppa:remmina-ppa-team/remmina-next \
+    && apt update \
+    && apt install -qqy --no-install-recommends remmina remmina-plugin-rdp remmina-plugin-secret \
+    && apt-add-repository ppa:obsproject/obs-studio \
+    && apt update \
+    && apt install -qqy --no-install-recommends obs-studio \
+    && apt install unzip \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
-    
-    
+
+# COPY conf.d/* /etc/supervisor/conf.d/
+
 RUN wget -c https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/fahclient_7.6.21_amd64.deb \
     && wget -c https://download.foldingathome.org/releases/public/release/fahcontrol/debian-stable-64bit/v7.6/fahcontrol_7.6.21-1_all.deb \
     
@@ -72,9 +68,6 @@ RUN tar -xvf data.tar.xz
     
 RUN dpkg -i --force-depends fahclient_7.6.21_amd64.deb
 RUN dpkg -i --force-depends fahcontrol_7.6.21-1_all.deb
-
-
-# COPY conf.d/* /etc/supervisor/conf.d/
 
 
 #============================
@@ -93,7 +86,7 @@ ENV SCREEN_WIDTH=1280 \
 # RUN apt-get update -qqy \
 #     && apt-get -qqy install \
 #         xserver-xorg xserver-xorg-video-fbdev xinit pciutils xinput xfonts-100dpi xfonts-75dpi xfonts-scalable kde-plasma-desktop
-RUN apt --fix-broken install -y
+
 RUN apt-get update -qqy \
     && apt-get -qqy install --no-install-recommends \
         dbus-x11 xfce4 \
