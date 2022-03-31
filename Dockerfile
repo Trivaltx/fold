@@ -31,10 +31,6 @@ RUN apt-get -qqy update \
 RUN cp /usr/share/novnc/vnc.html /usr/share/novnc/index.html
 
 
-RUN wget https://raw.githubusercontent.com/Trivaltx/fold/main/adduser.sh
-RUN chmod +x adduser.sh
-RUN ./adduser.sh
-
 
 COPY scripts/* /opt/bin/
 
@@ -69,7 +65,6 @@ RUN apt-get update \
     
 RUN wget -c https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/fahclient_7.6.21_amd64.deb \
     && wget -c https://download.foldingathome.org/releases/public/release/fahcontrol/debian-stable-64bit/v7.6/fahcontrol_7.6.21-1_all.deb \
-    && wget -c https://download.foldingathome.org/releases/public/release/fahviewer/debian-stable-64bit/v7.6/fahviewer_7.6.21_amd64.deb
     
 RUN ar vx fahclient_7.6.21_amd64.deb
 RUN tar -xvf control.tar.xz
@@ -77,7 +72,6 @@ RUN tar -xvf data.tar.xz
     
 RUN dpkg -i --force-depends fahclient_7.6.21_amd64.deb
 RUN dpkg -i --force-depends fahcontrol_7.6.21-1_all.deb
-RUN dpkg -i --force-depends fahviewer_7.6.21_amd64.deb
 
 
 # COPY conf.d/* /etc/supervisor/conf.d/
